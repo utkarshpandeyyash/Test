@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Online Voting System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>🗳️ Online Voting System</h1>
+    <p class="subtitle">Cast your vote securely</p>
+
+    <!-- Candidate A -->
+    <div class="candidate-box">
+        <div class="candidate-info">
+            <img src="https://via.placeholder.com/50" alt="Candidate A">
+            <span>Candidate A</span>
+        </div>
+        <button onclick="vote('A')">Vote</button>
+    </div>
+
+    <!-- Candidate B -->
+    <div class="candidate-box">
+        <div class="candidate-info">
+            <img src="https://via.placeholder.com/50" alt="Candidate B">
+            <span>Candidate B</span>
+        </div>
+        <button onclick="vote('B')">Vote</button>
+    </div>
+
+    <!-- Candidate C -->
+    <div class="candidate-box">
+        <div class="candidate-info">
+            <img src="https://via.placeholder.com/50" alt="Candidate C">
+            <span>Candidate C</span>
+        </div>
+        <button onclick="vote('C')">Vote</button>
+    </div>
+
+    <!-- View Result -->
+    <button class="view-btn" onclick="updateResult()">View Result</button>
+
+    <!-- Result Section -->
+    <div class="result" id="result">
+        <h2>📊 Voting Result</h2>
+
+        <div class="result-item">
+            Candidate A <span id="voteA">0</span>
+        </div>
+
+        <div class="result-item">
+            Candidate B <span id="voteB">0</span>
+        </div>
+
+        <div class="result-item">
+            Candidate C <span id="voteC">0</span>
+        </div>
+
+        <div class="total-votes">
+            🧮 Total Votes: <span id="totalVotes">0</span>
+        </div>
+
+        <div class="winner" id="winner"></div>
+    </div>
+</div>
+
+<!-- Success Popup -->
+<div class="popup" id="popup">
+    <div class="popup-content">
+        <img id="popupImg" src="">
+        <h2 id="popupName"></h2>
+        <p>✅ You have successfully voted!</p>
+        <button onclick="closePopup()">OK</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

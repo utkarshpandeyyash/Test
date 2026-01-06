@@ -1,48 +1,62 @@
-let votes = { A: 0, B: 0, C: 0 };
+// Initialize votes if not present
+if (!localStorage.getItem("votes")) {
+    localStorage.setItem("votes", JSON.stringify({
+        A: 0,
+        B: 0,
+        C: 0
+    }));
+}
 
-// Candidate data
+// Read votes
+let votes = JSON.parse(localStorage.getItem("votes"));
+
 const candidates = {
     A: { name: "Candidate A", img: "https://via.placeholder.com/70" },
     B: { name: "Candidate B", img: "https://via.placeholder.com/70" },
     C: { name: "Candidate C", img: "https://via.placeholder.com/70" }
 };
 
-// Vote Function (Multiple votes allowed)
+// Voting function (used on index.html)
 function vote(candidate) {
     votes[candidate]++;
+    localStorage.setItem("votes", JSON.stringify(votes));
     showPopup(candidate);
 }
 
-// Show success popup
+// Popup functions (used on index.html)
 function showPopup(candidate) {
     document.getElementById("popupImg").src = candidates[candidate].img;
     document.getElementById("popupName").innerText = candidates[candidate].name;
     document.getElementById("popup").style.display = "flex";
 }
 
-// Close popup
 function closePopup() {
     document.getElementById("popup").style.display = "none";
 }
 
-// Show result ONLY when button clicked
-function updateResult() {
-    document.getElementById("voteA").innerText = votes.A;
-    document.getElementById("voteB").innerText = votes.B;
-    document.getElementById("voteC").innerText = votes.C;
+// Result display function (used on result.html)
+function showResult() {
+    const storedVotes = JSON.parse(localStorage.getItem("votes"));
 
-    let total = votes.A + votes.B + votes.C;
-    document.getElementById("totalVotes").innerText = total;
+    document.querySelector(".result").style.display = "block";
 
-    let maxVotes = Math.max(votes.A, votes.B, votes.C);
-    let winner = "No votes yet";
+    document.getElementById("voteA").textContent = storedVotes.A;
+    document.getElementById("voteB").textContent = storedVotes.B;
+    document.getElementById("voteC").textContent = storedVotes.C;
 
-    if (maxVotes > 0) {
-        if (votes.A === maxVotes) winner = "Candidate A";
-        if (votes.B === maxVotes) winner = "Candidate B";
-        if (votes.C === maxVotes) winner = "Candidate C";
-    }
+    const total = storedVotes.A + storedVotes.B + storedVotes.C;
+    document.getElementById("totalVotes").textContent = total;
 
-    document.getElementById("winner").innerText = "🏆 Winner: " + winner;
-    document.getElementById("result").style.display = "block";
+    let maxVotes = Math.max(storedVotes.A, storedVotes.B, storedVotes.C);
+    let winners = [];
+
+    if (storedVotes.A === maxVotes && maxVotes > 0) winners.push("Candidate A");
+    if (storedVotes.B === maxVotes && maxVotes > 0) winners.push("Candidate B");
+    if (storedVotes.C === maxVotes && maxVotes > 0) winners.push("Candidate C");
+
+    document.getElementById("winner").textContent =
+        winners.length === 0
+            ? "No votes yet"
+            : "🏆 Winner: " + winners.join(" & ");
 }
+

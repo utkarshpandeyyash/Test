@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Voting Result</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>📊 Voting Result</h1>
+
+    <div class="result">
+        <div class="result-item">
+            Candidate A <span id="voteA">0</span>
+        </div>
+
+        <div class="result-item">
+            Candidate B <span id="voteB">0</span>
+        </div>
+
+        <div class="result-item">
+            Candidate C <span id="voteC">0</span>
+        </div>
+
+        <div class="total-votes">
+            🧮 Total Votes: <span id="totalVotes">0</span>
+        </div>
+
+        <div class="winner" id="winner"></div>
+    </div>
+
+    <a href="index.html">
+        <button class="view-btn">⬅ Back to Voting</button>
+    </a>
+</div>
+
+<script src="script.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        showResult();
+    });
+</script>
+
+</body>
+</html>

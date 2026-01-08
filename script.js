@@ -7,7 +7,11 @@ if (!localStorage.getItem("votes")) {
     }));
 }
 
-// Read votes
+// One-vote flag
+if (!localStorage.getItem("hasVoted")) {
+    localStorage.setItem("hasVoted", "false");
+}
+
 let votes = JSON.parse(localStorage.getItem("votes"));
 
 const candidates = {
@@ -16,14 +20,32 @@ const candidates = {
     C: { name: "Candidate C", img: "https://via.placeholder.com/70" }
 };
 
-// Voting function (used on index.html)
+// 🔐 Vote function (ONE VOTE ONLY)
 function vote(candidate) {
+    if (localStorage.getItem("hasVoted") === "true") {
+        alert("❌ You have already voted!");
+        return;
+    }
+
     votes[candidate]++;
     localStorage.setItem("votes", JSON.stringify(votes));
+    localStorage.setItem("hasVoted", "true");
+
+    disableVoteButtons();
     showPopup(candidate);
 }
 
-// Popup functions (used on index.html)
+// Disable buttons after voting
+function disableVoteButtons() {
+    const buttons = document.querySelectorAll(".candidate-box button");
+    buttons.forEach(btn => {
+        btn.disabled = true;
+        btn.style.opacity = "0.6";
+        btn.style.cursor = "not-allowed";
+    });
+}
+
+// Popup
 function showPopup(candidate) {
     document.getElementById("popupImg").src = candidates[candidate].img;
     document.getElementById("popupName").innerText = candidates[candidate].name;
@@ -34,10 +56,18 @@ function closePopup() {
     document.getElementById("popup").style.display = "none";
 }
 
-// Result display function (used on result.html)
+// 🔄 Disable buttons on page load if already voted
+document.addEventListener("DOMContentLoaded", function () {
+    if (localStorage.getItem("hasVoted") === "true") {
+        disableVoteButtons();
+    }
+});
+
+// 📊 Result page logic
 function showResult() {
     const storedVotes = JSON.parse(localStorage.getItem("votes"));
 
+    // show hidden result box
     document.querySelector(".result").style.display = "block";
 
     document.getElementById("voteA").textContent = storedVotes.A;

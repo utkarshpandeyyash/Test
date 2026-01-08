@@ -174,3 +174,20 @@ background: linear-gradient(90deg, rgba(107, 109, 110, 1) 0%, rgba(82, 168, 117,
     from { transform: scale(0.7); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
 }
+.reset-btn {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    padding: 8px 14px;
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    z-index: 1000;
+}
+
+.reset-btn:hover {
+    opacity: 0.9;
+}

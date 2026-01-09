@@ -4,44 +4,40 @@
     <meta charset="UTF-8">
     <title>Voting Result</title>
     <link rel="stylesheet" href="style.css">
-    <button clss="reset-btn" onclick="resetResult">🔁 Reset</button>
 </head>
 <body>
+
+<button class="reset-btn" onclick="resetVotes()">🔐 Reset</button>
 
 <div class="container">
     <h1>📊 Voting Result</h1>
 
-    <div class="result">
-        <div class="result-item">
-            Candidate A <span id="voteA">0</span>
-        </div>
-
-        <div class="result-item">
-            Candidate B <span id="voteB">0</span>
-        </div>
-
-        <div class="result-item">
-            Candidate C <span id="voteC">0</span>
-        </div>
-
-        <div class="total-votes">
-            🧮 Total Votes: <span id="totalVotes">0</span>
-        </div>
-
-        <div class="winner" id="winner"></div>
+    <div class="result-item">
+        Candidate A <span id="voteA">0</span>
     </div>
 
+    <div class="result-item">
+        Candidate B <span id="voteB">0</span>
+    </div>
+
+    <div class="result-item">
+        Candidate C <span id="voteC">0</span>
+    </div>
+
+    <div class="total-votes">
+        Total Votes: <span id="totalVotes">0</span>
+    </div>
+
+    <div class="winner" id="winner"></div>
+
     <a href="index.html">
-        <button class="view-btn">⬅ Back to Voting</button>
+        <button class="view-btn">⬅ Back</button>
     </a>
 </div>
 
 <script src="script.js"></script>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        showResult();
-    });
+    document.addEventListener("DOMContentLoaded", showResult);
 </script>
-
 </body>
 </html>

@@ -1,92 +1,81 @@
-// Initialize votes if not present
+// Initialize storage
 if (!localStorage.getItem("votes")) {
-    localStorage.setItem("votes", JSON.stringify({
-        A: 0,
-        B: 0,
-        C: 0
-    }));
+    localStorage.setItem("votes", JSON.stringify({ A: 0, B: 0, C: 0 }));
 }
-
-// One-vote flag
 if (!localStorage.getItem("hasVoted")) {
     localStorage.setItem("hasVoted", "false");
 }
 
 let votes = JSON.parse(localStorage.getItem("votes"));
 
-const candidates = {
-    A: { name: "Candidate A", img: "https://via.placeholder.com/70" },
-    B: { name: "Candidate B", img: "https://via.placeholder.com/70" },
-    C: { name: "Candidate C", img: "https://via.placeholder.com/70" }
-};
-
-// 🔐 Vote function (ONE VOTE ONLY)
+// Voting (ONE vote only)
 function vote(candidate) {
     if (localStorage.getItem("hasVoted") === "true") {
-        alert("❌ You have already voted!");
+        alert("You have already voted!");
         return;
     }
 
     votes[candidate]++;
     localStorage.setItem("votes", JSON.stringify(votes));
     localStorage.setItem("hasVoted", "true");
-
-    disableVoteButtons();
-    showPopup(candidate);
+    alert("Vote submitted successfully!");
 }
 
-// Disable buttons after voting
-function disableVoteButtons() {
-    const buttons = document.querySelectorAll(".candidate-box button");
-    buttons.forEach(btn => {
-        btn.disabled = true;
-        btn.style.opacity = "0.6";
-        btn.style.cursor = "not-allowed";
-    });
-}
-
-// Popup
-function showPopup(candidate) {
-    document.getElementById("popupImg").src = candidates[candidate].img;
-    document.getElementById("popupName").innerText = candidates[candidate].name;
-    document.getElementById("popup").style.display = "flex";
-}
-
-function closePopup() {
-    document.getElementById("popup").style.display = "none";
-}
-
-// 🔄 Disable buttons on page load if already voted
-document.addEventListener("DOMContentLoaded", function () {
-    if (localStorage.getItem("hasVoted") === "true") {
-        disableVoteButtons();
-    }
-});
-
-// 📊 Result page logic
+// Show results
 function showResult() {
-    const storedVotes = JSON.parse(localStorage.getItem("votes"));
+    const v = JSON.parse(localStorage.getItem("votes"));
 
-    // show hidden result box
-    document.querySelector(".result").style.display = "block";
+    document.getElementById("voteA").innerText = v.A;
+    document.getElementById("voteB").innerText = v.B;
+    document.getElementById("voteC").innerText = v.C;
 
-    document.getElementById("voteA").textContent = storedVotes.A;
-    document.getElementById("voteB").textContent = storedVotes.B;
-    document.getElementById("voteC").textContent = storedVotes.C;
+    let total = v.A + v.B + v.C;
+    document.getElementById("totalVotes").innerText = total;
 
-    const total = storedVotes.A + storedVotes.B + storedVotes.C;
-    document.getElementById("totalVotes").textContent = total;
+    let max = Math.max(v.A, v.B, v.C);
+    let winner = "No votes yet";
 
-    let maxVotes = Math.max(storedVotes.A, storedVotes.B, storedVotes.C);
-    let winners = [];
+    if (max > 0) {
+        if (v.A === max) winner = "Candidate A";
+        if (v.B === max) winner = "Candidate B";
+        if (v.C === max) winner = "Candidate C";
+    }
 
-    if (storedVotes.A === maxVotes && maxVotes > 0) winners.push("Candidate A");
-    if (storedVotes.B === maxVotes && maxVotes > 0) winners.push("Candidate B");
-    if (storedVotes.C === maxVotes && maxVotes > 0) winners.push("Candidate C");
+    document.getElementById("winner").innerText = "🏆 Winner: " + winner;
+}
 
-    document.getElementById("winner").textContent =
-        winners.length === 0
-            ? "No votes yet"
-            : "🏆 Winner: " + winners.join(" & ");
+// Reset with secret code
+function resetVotes() {
+    let code = prompt("Enter admin code:");
+
+    if (code === "admin123") {
+        localStorage.setItem("votes", JSON.stringify({ A: 0, B: 0, C: 0 }));
+        localStorage.setItem("hasVoted", "false");
+        alert("Voting reset successful!");
+        location.reload();
+    } else {
+        alert("Wrong code!");
+    }
+}
+function verifyUser() {
+    let userId = prompt("Enter User ID:");
+    let password = prompt("Enter Password:");
+
+    // Demo credentials (for project)
+    if (userId === "user001" && password === "vote123") {
+        localStorage.setItem("hasVoted", "false");
+        alert("✅ Verification successful! You can vote again.");
+
+        // Enable buttons
+        const buttons = document.querySelectorAll(".candidate-box button");
+        buttons.forEach(btn => {
+            btn.disabled = false;
+            btn.style.opacity = "1";
+            btn.style.cursor = "pointer";
+        });
+
+    } else {
+        alert("❌ Invalid User ID or Password");
+    }
 }
 

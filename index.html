@@ -11,53 +11,30 @@
     <h1>🗳️ Online Voting System</h1>
     <p class="subtitle">Cast your vote securely</p>
 
-    <!-- Candidate A -->
     <div class="candidate-box">
-        <div class="candidate-info">
-            <img src="https://via.placeholder.com/50" alt="Candidate A">
-            <span>Candidate A</span>
-        </div>
+        <span>Candidate A</span>
         <button onclick="vote('A')">Vote</button>
     </div>
 
-    <!-- Candidate B -->
     <div class="candidate-box">
-        <div class="candidate-info">
-            <img src="https://via.placeholder.com/50" alt="Candidate B">
-            <span>Candidate B</span>
-        </div>
+        <span>Candidate B</span>
         <button onclick="vote('B')">Vote</button>
     </div>
 
-    <!-- Candidate C -->
     <div class="candidate-box">
-        <div class="candidate-info">
-            <img src="https://via.placeholder.com/50" alt="Candidate C">
-            <span>Candidate C</span>
-        </div>
+        <span>Candidate C</span>
         <button onclick="vote('C')">Vote</button>
     </div>
 
-    <!-- View Result -->
     <a href="result.html">
-    <button class="view-btn">View Result</button>
-</a>
+        <button class="view-btn">View Result</button>
+    </a>
+    
+    <button class="verify-btn" onclick="verifyUser()">🔓 Verify ID</button>
 
-</div>
-
-<!-- Success Popup -->
-<div class="popup" id="popup">
-    <div class="popup-content">
-        <img id="popupImg" src="">
-        <h2 id="popupName"></h2>
-        <p>✅ You have successfully voted!</p>
-        <button onclick="closePopup()">OK</button>
-    </div>
 </div>
 
 <script src="script.js"></script>
-<script>
-    document.addEventListener("DOMContentLoader", showResult);
-</script>
 </body>
 </html>
+

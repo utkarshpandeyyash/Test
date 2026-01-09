@@ -3,9 +3,8 @@
 }
 
 body {
-    font-family: "Segoe UI", Arial, sans-serif;
-    background: #020024;
-    background: radial-gradient(circle, rgba(2, 0, 36, 1) 0%, rgba(35, 35, 168, 1) 16%, rgba(0, 212, 255, 1) 100%);
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #2a5298, #1e3c72);
     min-height: 100vh;
     margin: 0;
     display: flex;
@@ -14,180 +13,71 @@ body {
 }
 
 .container {
-    background: #EEAECA;
-background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
-    width: 400px;
+    background: #fff;
+    width: 350px;
     padding: 30px;
-    border-radius: 18px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
     text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
 .subtitle {
     color: #666;
-    margin-bottom: 20px;
 }
 
-/* Candidate Card */
 .candidate-box {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    background: #297d9e;
-background: linear-gradient(90deg, rgba(41, 125, 158, 1) 0%, rgba(171, 196, 181, 1) 85%, rgba(237, 221, 83, 1) 100%);
-    padding: 12px 15px;
     margin: 12px 0;
-    border-radius: 12px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
 }
 
-.candidate-info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-weight: bold;
-}
-
-.candidate-info img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-}
-
-/* Vote Button */
-.candidate-box button {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+button {
+    padding: 8px 16px;
     border: none;
-    color: #fff;
-    padding: 8px 18px;
     border-radius: 20px;
+    background: #667eea;
+    color: white;
     cursor: pointer;
     font-weight: bold;
 }
 
-.candidate-box button:hover {
-    opacity: 0.9;
-}
-
-/* View Result Button */
 .view-btn {
-    margin-top: 15px;
     width: 100%;
-    padding: 10px;
-    background: linear-gradient(135deg, #8b8887, #210909);
-    border: none;
-    border-radius: 25px;
-    color: #fff;
-    font-size: 15px;
-    cursor: pointer;
-}
-
-/* Result Section */
-.result {
-    display: none;
-    margin-top: 25px;
-    padding: 20px;
-    background: #6b6d6e;
-background: linear-gradient(90deg, rgba(107, 109, 110, 1) 0%, rgba(82, 168, 117, 1) 100%, rgba(237, 221, 83, 1) 100%);
-    border-radius: 15px;
+    margin-top: 15px;
+    background: #333;
 }
 
 .result-item {
     display: flex;
     justify-content: space-between;
-    padding: 10px;
-    background: #fff;
-    margin: 8px 0;
-    border-radius: 10px;
+    margin: 10px 0;
 }
 
-.result-item span {
-    background: #4facfa;
-    color: #fff;
-    padding: 4px 14px;
-    border-radius: 20px;
-    font-weight: bold;
-}
-
-.total-votes {
+.total-votes, .winner {
     margin-top: 12px;
-    background: #fff3cd;
-    padding: 10px;
-    border-radius: 10px;
     font-weight: bold;
 }
 
-.winner {
-    margin-top: 12px;
-    background: #d4edda;
-    color: #155724;
-    padding: 10px;
-    border-radius: 10px;
-    font-weight: bold;
-}
-
-/* Popup */
-.popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
-    display: none;
-    justify-content: center;
-    align-items: center;
-}
-
-.popup-content {
-    background: #fff;
-    padding: 25px;
-    width: 280px;
-    border-radius: 18px;
-    text-align: center;
-    animation: scaleUp 0.3s ease;
-}
-
-.popup-content img {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-}
-
-.popup-content p {
-    color: #28a745;
-    font-weight: bold;
-}
-
-.popup-content button {
-    margin-top: 15px;
-    padding: 8px 20px;
-    border: none;
-    border-radius: 20px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-@keyframes scaleUp {
-    from { transform: scale(0.7); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
 .reset-btn {
     position: fixed;
     top: 15px;
     left: 15px;
-    padding: 8px 14px;
-    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    background: red;
     color: white;
-    border: none;
+    padding: 8px 16px;
     border-radius: 20px;
     cursor: pointer;
+}
+.verify-btn {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(135deg, #28a745, #218838);
+    border: none;
+    border-radius: 25px;
+    color: white;
     font-weight: bold;
-    z-index: 1000;
+    cursor: pointer;
 }
 
-.reset-btn:hover {
-    opacity: 0.9;
-}
+

@@ -23,13 +23,20 @@ function vote(candidate) {
 
 // Show results
 function showResult() {
+    // ❌ Block non-admin users
+    if (localStorage.getItem("isAdmin") !== "true") {
+        alert("❌ Access denied! Only admin can view results.");
+        window.location.href = "index.html";
+        return;
+    }
+
     const v = JSON.parse(localStorage.getItem("votes"));
 
     document.getElementById("voteA").innerText = v.A;
     document.getElementById("voteB").innerText = v.B;
     document.getElementById("voteC").innerText = v.C;
 
-    let total = v.A + v.B + v.C;
+    const total = v.A + v.B + v.C;
     document.getElementById("totalVotes").innerText = total;
 
     let max = Math.max(v.A, v.B, v.C);
@@ -37,8 +44,8 @@ function showResult() {
 
     if (max > 0) {
         if (v.A === max) winner = "Candidate A";
-        if (v.B === max) winner = "Candidate B";
-        if (v.C === max) winner = "Candidate C";
+        else if (v.B === max) winner = "Candidate B";
+        else if (v.C === max) winner = "Candidate C";
     }
 
     document.getElementById("winner").innerText = "🏆 Winner: " + winner;
@@ -46,17 +53,19 @@ function showResult() {
 
 // Reset with secret code
 function resetVotes() {
-    let code = prompt("Enter admin code:");
+    let code = prompt("Enter Admin Code:");
 
     if (code === "admin123") {
+        localStorage.setItem("isAdmin", "true");
         localStorage.setItem("votes", JSON.stringify({ A: 0, B: 0, C: 0 }));
         localStorage.setItem("hasVoted", "false");
-        alert("Voting reset successful!");
+        alert("✅ Admin verified. Voting reset!");
         location.reload();
     } else {
-        alert("Wrong code!");
+        alert("❌ Wrong admin code!");
     }
 }
+
 function verifyUser() {
     let userId = prompt("Enter User ID:");
     let password = prompt("Enter Password:");
@@ -78,4 +87,21 @@ function verifyUser() {
         alert("❌ Invalid User ID or Password");
     }
 }
+function logoutAdmin() {
+    localStorage.removeItem("isAdmin");
+    alert("Admin logged out!");
+    window.location.href = "index.html";
+}
+function adminLogin() {
+    let code = prompt("Enter Admin Code:");
+
+    if (code === "admin123") {
+        localStorage.setItem("isAdmin", "true");
+        alert("✅ Admin verified! You can now view results.");
+        window.location.href = "result.html";
+    } else {
+        alert("❌ Wrong admin code!");
+    }
+}
+
 
